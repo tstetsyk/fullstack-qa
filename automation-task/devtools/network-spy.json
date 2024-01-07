@@ -1,0 +1,97 @@
+{
+	"info": {
+		"_postman_id": "bf7b2f7b-04e9-4a9c-8ddc-a914e373b3e0",
+		"name": "Sephora",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19542547"
+	},
+	"item": [
+		{
+			"name": "Get product reviews",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"let response = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Number of reviews is correct\", () => {\r",
+							"    pm.expect(response.Results).to.have.length(30);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Reviews are sorted by helpfulness in descending order\", () => {\r",
+							"    pm.expect(response.Results[0].Helpfulness).not.to.be.a(\"null\");\r",
+							"    pm.expect(response.Results[0].Helpfulness).to.eql(1);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.bazaarvoice.com/data/reviews.json?Filter=contentlocale%3Aen*&Filter=ProductId%3AP39787544&Sort=Helpfulness%3Adesc&Limit=30&Offset=0&Include=Products%2CComments&Stats=Reviews&passkey=calXm2DyQVjcCy9agq85vmTJv5ELuuBCF2sdg4BnJzJus&apiversion=5.4&Locale=en_US",
+					"protocol": "https",
+					"host": [
+						"api",
+						"bazaarvoice",
+						"com"
+					],
+					"path": [
+						"data",
+						"reviews.json"
+					],
+					"query": [
+						{
+							"key": "Filter",
+							"value": "contentlocale%3Aen*"
+						},
+						{
+							"key": "Filter",
+							"value": "ProductId%3AP39787544"
+						},
+						{
+							"key": "Sort",
+							"value": "Helpfulness%3Adesc"
+						},
+						{
+							"key": "Limit",
+							"value": "30"
+						},
+						{
+							"key": "Offset",
+							"value": "0"
+						},
+						{
+							"key": "Include",
+							"value": "Products%2CComments"
+						},
+						{
+							"key": "Stats",
+							"value": "Reviews"
+						},
+						{
+							"key": "passkey",
+							"value": "calXm2DyQVjcCy9agq85vmTJv5ELuuBCF2sdg4BnJzJus"
+						},
+						{
+							"key": "apiversion",
+							"value": "5.4"
+						},
+						{
+							"key": "Locale",
+							"value": "en_US"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
